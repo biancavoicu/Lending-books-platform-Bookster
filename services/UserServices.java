@@ -1,13 +1,21 @@
 package services;
 
-import classes.User;
+import entities.User;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class UserServices {
-    public static List<User> usersList = new ArrayList<User>();
+    private static List<User> usersList = new ArrayList<User>();
+
+    public static List<User> getUsersList() {
+        return usersList;
+    }
+
+    public static void setUsersList(List<User> usersList) {
+        UserServices.usersList = usersList;
+    }
 
     public static void registerUser() {
         Scanner scanner = new Scanner(System.in);
@@ -51,7 +59,7 @@ public class UserServices {
 
     }
 
-    public static void printUsers() {
+    public static void displayUsers() {
         System.out.println("The registered users are: ");
         for (User user : usersList) {
             System.out.println(user);

@@ -1,4 +1,4 @@
-package classes;
+package entities;
 
 import java.util.List;
 
@@ -19,5 +19,12 @@ public class Article extends Material{
 
     public void setNumberOfPages(int numberOfPages) {
         this.numberOfPages = numberOfPages;
+    }
+
+    @Override
+    public String toString() {
+        return super.toString()+ "Article{" +
+                "numberOfPages=" + numberOfPages +
+                '}';
     }
 }

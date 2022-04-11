@@ -1,4 +1,4 @@
-package classes;
+package entities;
 
 public class Company {
     private String name;

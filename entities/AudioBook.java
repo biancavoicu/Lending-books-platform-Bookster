@@ -1,4 +1,4 @@
-package classes;
+package entities;
 
 import java.util.List;
 
@@ -29,5 +29,13 @@ public class AudioBook extends Material{
 
     public void setVoice(String voice) {
         this.voice = voice;
+    }
+
+    @Override
+    public String toString() {
+        return super.toString()+ "AudioBook{" +
+                "length=" + length +
+                ", voice='" + voice + '\'' +
+                '}';
     }
 }

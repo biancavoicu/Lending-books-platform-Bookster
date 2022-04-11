@@ -1,4 +1,4 @@
-package classes;
+package entities;
 
 public class Author implements Comparable<Author> {
     private String name;

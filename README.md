@@ -1,8 +1,8 @@
-<h4>The classes (POJO) used in this project:</h4>
+<h4>The entities (POJO) used in this project:</h4>
 Author, Company, Library, Loan, Material, Review, User  
 Material -> Article, AudioBook, Book  (Inheritance)
 
-<h4>The service classes:</h4>
+<h4>The service entities:</h4>
 LibraryServices, LoanServices, UserServices  
 
 ---

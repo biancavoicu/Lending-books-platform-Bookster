@@ -1,13 +1,20 @@
 package services;
 
-import classes.*;
+import entities.*;
 
 import java.util.*;
 
-import static services.UserServices.usersList;
 
 public class LibraryServices {
-    public static List<Library> libraries = new ArrayList<Library>();
+    private static List<Library> libraries = new ArrayList<Library>();
+
+    public static List<Library> getLibraries() {
+        return libraries;
+    }
+
+    public static void setLibraries(List<Library> libraries) {
+        LibraryServices.libraries = libraries;
+    }
 
     public static void registerLibrary() {
         Scanner scanner = new Scanner(System.in);
@@ -41,7 +48,7 @@ public class LibraryServices {
     }
 
 
-    public static void printLibraries() {
+    public static void displayLibraries() {
         for (Library lib : libraries) {
             System.out.println(lib);
         }
@@ -54,7 +61,6 @@ public class LibraryServices {
         System.out.println("Choose a library you want to add the material by typing the name");
         String libraryName = scanner.nextLine();
         boolean found = false;
-        boolean foundType = false;
 
         for (Library lib : libraries) {
             if (lib.getName().equals(libraryName)) {
@@ -62,7 +68,6 @@ public class LibraryServices {
                 String materialType = scanner.nextLine();
                 found = true;
                 if (materialType.equals("Book") || materialType.equals("AudioBook") || materialType.equals("Article")) {
-                    foundType = true;
                     List<Material> materials = lib.getMaterials();
                     String title;
                     String category;
@@ -82,6 +87,7 @@ public class LibraryServices {
                     System.out.println("Enter the category of the material:");
                     category = scanner.nextLine();
 
+
                     Author author = new Author(name, nationality);
 
                     try {
@@ -89,7 +95,10 @@ public class LibraryServices {
                             System.out.println("Enter the number of pages of the book:");
                             int numberOfPages = scanner.nextInt();
 
-                            Book book = new Book(title, author, category, reviews, numberOfPages);
+                            System.out.println("Enter the publisher of the book:");
+                            String publisher = scanner.nextLine();
+
+                            Book book = new Book(title, author, category, reviews, numberOfPages, publisher);
                             book.setNumberOfPages(numberOfPages);
                             materials.add(book);
 
@@ -215,6 +224,7 @@ public class LibraryServices {
 
     public static void addReview() {
         Scanner scanner = new Scanner(System.in);
+        List<User> usersList = UserServices.getUsersList();
         LibraryServices.availableLibraries();
         System.out.println("Choose the library you want to choose the material from, by typing the name:");
         String libraryName = scanner.nextLine();
