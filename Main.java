@@ -1,6 +1,7 @@
 import entities.*;
 import services.*;
 
+import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.List;
@@ -107,7 +108,6 @@ public class Main {
         AudioBook a = new AudioBook("Atomic Habits", jamesClear, "Psychology", reviews2, 5, "James Clear");
         Article art = new Article("Molecular mechanisms of developmental pathways in neurological disorders", nirajKumarJha, "Pharmacology", reviews3, 210289);
         Book b2 = new Book("Adams and Victor's Principles of Neurology", allanRopper, "Neurology", reviews4, 1664, "McGraw Hill");
-
         List<Material> materialList1 = new ArrayList<Material>();
         List<Material> materialList2 = new ArrayList<Material>();
         materialList1.add(b);
@@ -129,7 +129,14 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        populate();
+
+        List<User> users = FileServices.load("resources/users.csv", User.class);
+        FileServices.save(users, "resources/users2.csv", User.class);
+
+        // populate();
         menu();
+
+
+
     }
 }
