@@ -11,13 +11,13 @@ LibraryServices, LoanServices, UserServices
 
 1. Register a new user    
 2. Delete a specified user by email    
-3. Print list of users  
+3. Display list of users  
 4. Register a new library  
 5. Delete a specified library  
-6. Print list of libraries  
+6. Display list of libraries  
 7. Add a new material in a specified library  
-8. Print list of materials of a specified library  
+8. Display list of materials of a specified library  
 9. Delete a specified material of a specified library  
 10. Leave a review on a specified material in a specified library  
 11. Register a new loan    
-12. Print the list of loans    
+12. Display the list of loans    
