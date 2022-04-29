@@ -8,11 +8,19 @@ import java.util.Scanner;
 import java.util.InputMismatchException;
 
 public class LoanServices {
+    private static LoanServices instance = new LoanServices();
     public static List<Loan> loans = new ArrayList<Loan>();
 
-    public static void addLoan() {
-        List<Library> libraries = LibraryServices.getLibraries();
-        List<User> usersList = UserServices.getUsersList();
+    private LoanServices() {
+    }
+
+    public static LoanServices getInstance() {
+        return instance;
+    }
+
+    public void addLoan() {
+        List<Library> libraries = LibraryServices.getInstance().getLibraries();
+        List<User> usersList = UserServices.getInstance().getUsersList();
         Scanner scanner = new Scanner(System.in);
         System.out.println("Enter your user email address in order to loan from a library:");
         String enteredEmail = scanner.nextLine();
@@ -31,7 +39,7 @@ public class LoanServices {
 
         if (foundEmail == true) {
             System.out.println("The available libraries are:");
-            LibraryServices.displayLibraries();
+            LibraryServices.getInstance().displayLibraries();
             System.out.println("Choose the library you want to print the materials from, by typing the name:");
             String libraryName = scanner.nextLine();
 
@@ -82,7 +90,7 @@ public class LoanServices {
         } else System.out.println("The email you entered is not registered!");
     }
 
-    public static void displayLoans() {
+    public void displayLoans() {
         for (Loan loan : loans) {
             System.out.println(loan);
         }

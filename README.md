@@ -1,9 +1,9 @@
-<h4>The entities (POJO) used in this project:</h4>
-Author, Company, Library, Loan, Material, Review, User  
+<h4>The entities used in this project:</h4>
+Author, Company, Library, Loan, Material, Review, User, Newsletter, Log  
 Material -> Article, AudioBook, Book  (Inheritance)
 
 <h4>The service entities:</h4>
-LibraryServices, LoanServices, UserServices  
+LibraryServices, LoanServices, UserServices, FileServices  
 
 ---
 
@@ -21,3 +21,4 @@ LibraryServices, LoanServices, UserServices
 10. Leave a review on a specified material in a specified library  
 11. Register a new loan    
 12. Display the list of loans    
+13. Display the pieces of newsletter from 2022

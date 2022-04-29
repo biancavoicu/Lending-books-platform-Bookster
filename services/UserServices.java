@@ -1,5 +1,6 @@
 package services;
 
+import entities.Newsletter;
 import entities.User;
 
 import java.util.ArrayList;
@@ -7,17 +8,34 @@ import java.util.List;
 import java.util.Scanner;
 
 public class UserServices {
+    private static UserServices instance = new UserServices();
     private static List<User> usersList = new ArrayList<User>();
+    private static List<Newsletter> newslettersList = new ArrayList<>();
 
-    public static List<User> getUsersList() {
+    private UserServices() {
+    }
+
+    public static UserServices getInstance() {
+        return instance;
+    }
+
+    public List<Newsletter> getNewslettersList() {
+        return newslettersList;
+    }
+
+    public void setNewslettersList(List<Newsletter> newslettersList) {
+        UserServices.newslettersList = newslettersList;
+    }
+
+    public List<User> getUsersList() {
         return usersList;
     }
 
-    public static void setUsersList(List<User> usersList) {
+    public void setUsersList(List<User> usersList) {
         UserServices.usersList = usersList;
     }
 
-    public static void registerUser() {
+    public void registerUser() {
         Scanner scanner = new Scanner(System.in);
         String name;
         String email;
@@ -38,9 +56,10 @@ public class UserServices {
 
         User user = new User(name, email, telephone, companyName);
         usersList.add(user);
+        FileServices.save(usersList,"resources/users.csv", User.class, false);
     }
 
-    public static void deleteUser() {
+    public void deleteUser() {
         Scanner scanner = new Scanner(System.in);
         boolean found = false;
 
@@ -49,6 +68,7 @@ public class UserServices {
         for (User user : usersList) {
             if (enteredEmail.equals(user.getEmail())) {
                 usersList.remove(user);
+                FileServices.save(usersList,"resources/users.csv", User.class, false);
                 found = true;
                 break;
             }
@@ -59,10 +79,16 @@ public class UserServices {
 
     }
 
-    public static void displayUsers() {
+    public void displayUsers() {
         System.out.println("The registered users are: ");
         for (User user : usersList) {
             System.out.println(user);
+        }
+    }
+
+    public void displayNewsletter(){
+        for (Newsletter n : newslettersList){
+            System.out.println(n);
         }
     }
 }

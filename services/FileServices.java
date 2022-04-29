@@ -1,22 +1,11 @@
 package services;
 
-import entities.*;
-
 import java.io.*;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
 public class FileServices<T> {
-
-    private static FileServices instance = new FileServices();
-
-    private FileServices() {
-    }
-
-    public static FileServices getInstance() {
-        return instance;
-    }
 
     public static <T> List<T> load(String file, Class<T> clazz) {
 
@@ -83,14 +72,14 @@ public class FileServices<T> {
         }
     }
 
-    public static <T> void save(List<T> l, String file, Class<T> clazz) {
+    public static <T> void save(List<T> l, String file, Class<T> clazz, boolean append) {
         try {
             new File(file).createNewFile();
         } catch (Exception e) {
             System.out.println("Error at creating the file " + file);
         }
 
-        try (FileWriter f = new FileWriter(file)) {
+        try (FileWriter f = new FileWriter(file, append)) {
 
             var memberFields = clazz.getDeclaredFields();
 
@@ -100,6 +89,7 @@ public class FileServices<T> {
                 memberNames.add(field.toString().replaceAll(".*\\.", ""));
             }
 
+            if(!append){
             for (int j = 0; j < memberNames.size(); j++) {
                 f.write(memberNames.get(j));
                 if (j + 1 != memberNames.size()) {
@@ -107,6 +97,7 @@ public class FileServices<T> {
                 }
             }
             f.write('\n');
+            }
 
             for (var i : l) {
                 for (int j = 0; j < memberNames.size(); j++) {
