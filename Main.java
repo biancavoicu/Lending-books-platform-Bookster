@@ -1,8 +1,5 @@
 import entities.*;
 import services.*;
-
-import java.io.FileWriter;
-import java.sql.Timestamp;
 import java.util.*;
 
 public class Main {
@@ -35,67 +32,67 @@ public class Main {
                     case 0:
                         break;
                     case 1:
-                        FileServices.save(Arrays.asList(new Log("Register a new user")),
+                        WriteFileServices.save(Arrays.asList(new Log("Register a new user")),
                                 "resources/log.csv", Log.class, true);
                         UserServices.getInstance().registerUser();
                         break;
                     case 2:
-                        FileServices.save(Arrays.asList(new Log("Delete a specified user by email")),
+                        WriteFileServices.save(Arrays.asList(new Log("Delete a specified user by email")),
                                 "resources/log.csv", Log.class, true);
                         UserServices.getInstance().deleteUser();
                         break;
                     case 3:
-                        FileServices.save(Arrays.asList(new Log("Display list of users")),
+                        WriteFileServices.save(Arrays.asList(new Log("Display list of users")),
                                 "resources/log.csv", Log.class, true);
                         UserServices.getInstance().displayUsers();
                         break;
                     case 4:
-                        FileServices.save(Arrays.asList(new Log("Register a new library")),
+                        WriteFileServices.save(Arrays.asList(new Log("Register a new library")),
                                 "resources/log.csv", Log.class, true);
                         LibraryServices.getInstance().registerLibrary();
                         break;
                     case 5:
-                        FileServices.save(Arrays.asList(new Log("Delete a specified library")),
+                        WriteFileServices.save(Arrays.asList(new Log("Delete a specified library")),
                                 "resources/log.csv", Log.class, true);
                         LibraryServices.getInstance().deleteLibrary();
                         break;
                     case 6:
-                        FileServices.save(Arrays.asList(new Log("Display list of libraries")),
+                        WriteFileServices.save(Arrays.asList(new Log("Display list of libraries")),
                                 "resources/log.csv", Log.class, true);
                         LibraryServices.getInstance().displayLibraries();
                         break;
                     case 7:
-                        FileServices.save(Arrays.asList(new Log("Add a new material in a specified library")),
+                        WriteFileServices.save(Arrays.asList(new Log("Add a new material in a specified library")),
                                 "resources/log.csv", Log.class, true);
                         LibraryServices.getInstance().addMaterial();
                         break;
                     case 8:
-                        FileServices.save(Arrays.asList(new Log("Display list of materials of a specified library")),
+                        WriteFileServices.save(Arrays.asList(new Log("Display list of materials of a specified library")),
                                 "resources/log.csv", Log.class, true);
                         LibraryServices.getInstance().printMaterials();
                         break;
                     case 9:
-                        FileServices.save(Arrays.asList(new Log("Delete a specified material of a specified library")),
+                        WriteFileServices.save(Arrays.asList(new Log("Delete a specified material of a specified library")),
                                 "resources/log.csv", Log.class, true);
                         LibraryServices.getInstance().deleteMaterial();
                         break;
                     case 10:
-                        FileServices.save(Arrays.asList(new Log("Leave a review on a specified material in a specified library")),
+                        WriteFileServices.save(Arrays.asList(new Log("Leave a review on a specified material in a specified library")),
                                 "resources/log.csv", Log.class, true);
                         LibraryServices.getInstance().addReview();
                         break;
                     case 11:
-                        FileServices.save(Arrays.asList(new Log("Register a new loan")),
+                        WriteFileServices.save(Arrays.asList(new Log("Register a new loan")),
                                 "resources/log.csv", Log.class, true);
                         LoanServices.getInstance().addLoan();
                         break;
                     case 12:
-                        FileServices.save(Arrays.asList(new Log("Display the list of loans")),
+                        WriteFileServices.save(Arrays.asList(new Log("Display the list of loans")),
                                 "resources/log.csv", Log.class, true);
                         LoanServices.getInstance().displayLoans();
                         break;
                     case 13:
-                        FileServices.save(Arrays.asList(new Log("Display the pieces of newsletter from 2022")),
+                        WriteFileServices.save(Arrays.asList(new Log("Display the pieces of newsletter from 2022")),
                                 "resources/log.csv", Log.class, true);
                         UserServices.getInstance().getNewslettersList().stream()
                                 .filter(s -> (s.getDate()).charAt(s.getDate().length() - 1) == '2')
@@ -109,8 +106,8 @@ public class Main {
     }
 
     private static void populate() {
-        List<User> usersList = FileServices.load("resources/users.csv", User.class);
-        List<Author> authorsList = FileServices.load("resources/authors.csv", Author.class);
+        List<User> usersList = ReadFileServices.load("resources/users.csv", User.class);
+        List<Author> authorsList = ReadFileServices.load("resources/authors.csv", Author.class);
         List<Library> libraries = new ArrayList<>();
 
         List<Review> reviews1 = new ArrayList<>();
@@ -145,14 +142,12 @@ public class Main {
 
         UserServices.getInstance().setUsersList(usersList);
 
-        List<Newsletter> newslettersList = FileServices.load("resources/newsletters.csv", Newsletter.class);
+        List<Newsletter> newslettersList = ReadFileServices.load("resources/newsletters.csv", Newsletter.class);
         UserServices.getInstance().setNewslettersList(newslettersList);
     }
 
     public static void main(String[] args) {
         populate();
-        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-        System.out.println(timestamp);
         menu();
     }
 }

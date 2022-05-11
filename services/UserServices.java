@@ -56,7 +56,7 @@ public class UserServices {
 
         User user = new User(name, email, telephone, companyName);
         usersList.add(user);
-        FileServices.save(usersList,"resources/users.csv", User.class, false);
+        WriteFileServices.save(usersList,"resources/users.csv", User.class, false);
     }
 
     public void deleteUser() {
@@ -68,7 +68,7 @@ public class UserServices {
         for (User user : usersList) {
             if (enteredEmail.equals(user.getEmail())) {
                 usersList.remove(user);
-                FileServices.save(usersList,"resources/users.csv", User.class, false);
+                WriteFileServices.save(usersList,"resources/users.csv", User.class, false);
                 found = true;
                 break;
             }
