@@ -1,22 +1,29 @@
 package services;
 
 import entities.*;
-
 import java.util.*;
 
 
 public class LibraryServices {
+    private static LibraryServices instance = new LibraryServices();
     private static List<Library> libraries = new ArrayList<Library>();
 
-    public static List<Library> getLibraries() {
+    private LibraryServices() {
+    }
+
+    public static LibraryServices getInstance() {
+        return instance;
+    }
+
+    public List<Library> getLibraries() {
         return libraries;
     }
 
-    public static void setLibraries(List<Library> libraries) {
+    public void setLibraries(List<Library> libraries) {
         LibraryServices.libraries = libraries;
     }
 
-    public static void registerLibrary() {
+    public void registerLibrary() {
         Scanner scanner = new Scanner(System.in);
         String name;
         String address;
@@ -41,23 +48,23 @@ public class LibraryServices {
     }
 
 
-    public static void sortMaterials(Library lib) {
+    public void sortMaterials(Library lib) {
         List<Material> mat = lib.getMaterials();
         Collections.sort(mat, Material.compareByTitleAndAuthor);
         lib.setMaterials(mat);
     }
 
 
-    public static void displayLibraries() {
+    public void displayLibraries() {
         for (Library lib : libraries) {
             System.out.println(lib);
         }
     }
 
-    public static void addMaterial() {
+    public void addMaterial() {
         Scanner scanner = new Scanner(System.in);
 
-        LibraryServices.availableLibraries();
+        LibraryServices.getInstance().availableLibraries();
         System.out.println("Choose a library you want to add the material by typing the name");
         String libraryName = scanner.nextLine();
         boolean found = false;
@@ -125,7 +132,7 @@ public class LibraryServices {
                         System.out.println("The number of pages/ length of Audiobook must be integers!");
                     }
                     lib.setMaterials(materials);
-                    LibraryServices.sortMaterials(lib);
+                    LibraryServices.getInstance().sortMaterials(lib);
                     break;
                 } else System.out.println("The type of material that you entered does not exist!");
             }
@@ -134,9 +141,9 @@ public class LibraryServices {
             System.out.println("The name of the library that you entered does not exist in our data base!");
     }
 
-    public static void deleteLibrary() {
+    public void deleteLibrary() {
         Scanner scanner = new Scanner(System.in);
-        LibraryServices.availableLibraries();
+        LibraryServices.getInstance().availableLibraries();
         System.out.println("Choose the library you want to delete by typing the name:");
         String libraryName = scanner.nextLine();
         boolean found = false;
@@ -153,9 +160,9 @@ public class LibraryServices {
     }
 
 
-    public static void printMaterials() {
+    public void printMaterials() {
         Scanner scanner = new Scanner(System.in);
-        LibraryServices.availableLibraries();
+        LibraryServices.getInstance().availableLibraries();
         System.out.println("Choose the library you want to print the materials from, by typing the name:");
         String libraryName = scanner.nextLine();
         boolean found = false;
@@ -175,16 +182,16 @@ public class LibraryServices {
 
     }
 
-    public static void availableLibraries() {
+    public void availableLibraries() {
         System.out.println("The available libraries are:");
         for (Library lib : libraries) {
             System.out.println(lib.getName());
         }
     }
 
-    public static void deleteMaterial() {
+    public void deleteMaterial() {
         Scanner scanner = new Scanner(System.in);
-        LibraryServices.availableLibraries();
+        LibraryServices.getInstance().availableLibraries();
         System.out.println("Choose the library you want to delete the material from, by typing the name:");
         String libraryName = scanner.nextLine();
         boolean found = false;
@@ -222,10 +229,10 @@ public class LibraryServices {
 
     }
 
-    public static void addReview() {
+    public void addReview() {
         Scanner scanner = new Scanner(System.in);
-        List<User> usersList = UserServices.getUsersList();
-        LibraryServices.availableLibraries();
+        List<User> usersList = UserServices.getInstance().getUsersList();
+        LibraryServices.getInstance().availableLibraries();
         System.out.println("Choose the library you want to choose the material from, by typing the name:");
         String libraryName = scanner.nextLine();
         boolean found = false;

@@ -11,6 +11,9 @@ public class Company {
         this.telephone = telephone;
     }
 
+    public Company() {
+    }
+
     public String getName() {
         return name;
     }
